@@ -1,0 +1,30 @@
+$mobile: $grid_item_width;
+$tablet: $grid_item_width * 2;
+$desktop: $grid_item_width * 4;
+$large-desktop: $grid_item_width * 5;
+
+@media screen and (min-width: $mobile) {
+	.grid-item {
+		width: 100%;
+	}
+}
+
+@media screen and (min-width: $tablet) {
+	.grid-item {
+		width: 50%;
+	}
+}
+
+@media screen and (min-width: $desktop) {
+	.grid-item {
+		width: 25%;
+	}
+}
+
+@media screen and (min-width: $large-desktop) {
+	.grid-item {
+		width: 17%;
+		display: inline-block;
+		float: left;
+	}
+}

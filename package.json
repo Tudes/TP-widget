@@ -1,0 +1,26 @@
+{
+  "name": "TP-widget",
+  "version": "0.0.1",
+  "description": "A widget built for a job application at Trustpilot",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Tudes/TP-widget"
+  },
+  "author": {
+    "name": "Tudor Cojocaru",
+    "email": "tudor@cojoca.ru"
+  },
+  "devDependencies": {
+    "del": "^1.2.0",
+    "gulp": "^3.9.0",
+    "gulp-autoprefixer": "^2.3.1",
+    "gulp-imagemin": "^2.3.0",
+    "gulp-jade": "^1.1.0",
+    "gulp-ruby-sass": "^1.0.5",
+    "gulp-sass": "^2.0.4",
+    "gulp-todo": "^3.2.0",
+    "gulp-util": "^3.0.6",
+    "yargs": "^3.18.0"
+  },
+  "dependencies": {}
+}
