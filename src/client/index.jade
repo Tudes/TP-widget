@@ -1,62 +1,18 @@
 doctype
-html
+html(ng-app='app')
 	head
 		title= "TP-widget"
 		link(href='./style.css', rel='stylesheet')
 	body
-		//-h1 Angular Gulp Sass TP-widget
-		div(class='grid' ui-view)
-			a(class='grid-item' href='#')
-				h2(class='title') Super quality.. I will show here again!
-				div(class='description') "Super nice quality, fast delivery, good prices"
-				img(class='picture' src='./images/simon-lock.png' alt='Simon Lock') 
-				div(class='location') 
-					img(class='i-marker' src='./images/marker.png' alt='Marker')
-					| Kolding, Denmark
-				div(class='user')
-					img(class='i-user' src='./images/user.png' alt='User')
-					| Simon Lock
-				//- Use switch statement to pick the right rating image
-				//- Use solid colors instead
-		div(class='grid' ui-view)
-			a(class='grid-item' href='#')
-				h2(class='title') Super quality.. I will show here again!
-				div(class='description') "Super nice quality, fast delivery, good prices"
-				img(class='picture' src='./images/simon-lock.png' alt='Simon Lock') 
-				div(class='location') 
-					img(class='i-marker' src='./images/marker.png' alt='Marker')
-					| Kolding, Denmark
-				div(class='user')
-					img(class='i-user' src='./images/user.png' alt='User')
-					| Simon Lock
-				//- Use switch statement to pick the right rating image
-				//- Use solid colors instead
-		div(class='grid' ui-view)
-			a(class='grid-item' href='#')
-				h2(class='title') Super quality.. I will show here again!
-				div(class='description') "Super nice quality, fast delivery, good prices"
-				img(class='picture' src='./images/simon-lock.png' alt='Simon Lock') 
-				div(class='location') 
-					img(class='i-marker' src='./images/marker.png' alt='Marker')
-					| Kolding, Denmark
-				div(class='user')
-					img(class='i-user' src='./images/user.png' alt='User')
-					| Simon Lock
-				//- Use switch statement to pick the right rating image
-				//- Use solid colors instead
-		div(class='grid' ui-view)
-			a(class='grid-item' href='#')
-				h2(class='title') Super quality.. I will show here again!
-				div(class='description') "Super nice quality, fast delivery, good prices"
-				img(class='picture' src='./images/simon-lock.png' alt='Simon Lock') 
-				div(class='location') 
-					img(class='i-marker' src='./images/marker.png' alt='Marker')
-					| Kolding, Denmark
-				div(class='user')
-					img(class='i-user' src='./images/user.png' alt='User')
-					| Simon Lock
-				//- Use switch statement to pick the right rating image
-				//- Use solid colors instead
-
+		div(ui-view)
 		script(src='./vendor/angular.min.js')
 		script(src='./vendor/angular-ui-router.min.js')
+		script(src='./vendor/angular-animate.min.js')
+
+		script(src='./app/app.module.js')
+
+		script(src='./app/core/core.module.js')
+		script(src='./app/core/core.controller.js')
+
+		script(src='./app/reviews/reviews.module.js')
+		script(src='./app/reviews/reviews.controller.js')

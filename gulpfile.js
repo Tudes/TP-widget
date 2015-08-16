@@ -3,10 +3,8 @@
 //TODO: Add Gulp-load-plugins
 //TODO: Create a config file to store paths
 //TODO: Add BrowserSync
-//TODO: Add Autoprefixer
 //
 //TODO: Features Animate CSS Level 3
-//TODO: Features Jade, Gulp, NodeJS/Express, Angular
 
 var gulp = require('gulp'),
 	args = require('yargs').argv,
@@ -16,6 +14,8 @@ var gulp = require('gulp'),
 	jade = require('gulp-jade'),
 	imagemin = require('gulp-imagemin'),
 	autoprefixer = require('gulp-autoprefixer'),
+	uglify = require('gulp-uglify'),
+	concat = require('gulp-concat'),
 	sass = require('gulp-ruby-sass');
 
 /**
@@ -39,6 +39,24 @@ gulp.task('jade', ['clean-jade'], function() {
 			pretty: true
 		}))
 		.pipe(gulp.dest('./.tmp'))
+});
+
+gulp.task('uglify', function() {
+	log('Uglifying vendor libraries');
+
+	return gulp
+		.src('./.tmp/vendor/*.js')
+		.pipe(uglify())
+		.pipe(gulp.dest('./.tmp/minify'));
+});
+
+gulp.task('concat', function() {
+	log('Concatinating vendor libraries');
+
+	return gulp
+		.src('./.tmp/minify/*.js')
+		.pipe(concat('all.js'))
+		.pipe(gulp.dest('./.tmp/concat'));
 });
 
 /**
@@ -109,6 +127,48 @@ gulp.task('watch', function() {
 gulp.task('default', ['watch', 'jade', 'css']);
 
 /*==========  helperFunctions  ==========*/
+
+// function startBrowserSync() {
+// 	if (args.nosync || browserSync.active) {
+// 		return;
+// 	}
+
+// 	log('Starting browser-sync on port ' + port);
+
+// 	gulp.watch(['src/client/styles/style.scss'], ['css'])
+// 		.on('change', function(event) {
+// 			changeEvent(event); 
+// 		});
+// 	gulp.watch(['src/client/**/*.jade'], ['jade'])
+// 		.on('change', function(event) {
+// 			changeEvent(event); 
+// 		});
+
+// 	var options = {
+// 		proxy: 'localhost:' + port,
+// 		port: 3000,
+// 		files: [
+// 			'./tmp/**/*.*',
+// 			'!src/client/styles/style.scss',
+// 			'!src/client/**/*.jade',
+// 			'./.tmp/style.css'
+// 		],
+// 		ghostMode: {
+// 			clicks: true,
+// 			location: false,
+// 			forms: true,
+// 			scroll: true
+// 		},
+// 		injectChanges: true,
+// 		logFileChanges: true,
+// 		logLevel: 'debug',
+// 		logPrefix: 'gulp-patterns',
+// 		notify: true,
+// 		reloadDelay: 1000
+// 	};
+
+// 	browserSync(options);
+// }
 
 function errorLog(error) {
 	console.error.bind(error);

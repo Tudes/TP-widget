@@ -1,0 +1,12 @@
+div(class='grid')
+	div(class='grid-box' ng-repeat="review in reviews")
+		a(class='grid-item' ng-href='#/app/{{review.id}}/review')
+			h2(class='title') {{review.reviewTitle}}
+			div(class='description') {{review.reviewBody | limitTo: 15}}...
+			img(class='picture' ng-src='images/{{review.img}}.png' alt='{{review.fullName}}') 
+			div(class='location') 
+				img(class='i-marker' src='images/marker.png' alt='Marker')
+				| {{review.location}}
+			div(class='user')
+				img(class='i-user' src='images/user.png' alt='User')
+				| {{review.fullName}}

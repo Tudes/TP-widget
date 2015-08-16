@@ -1,0 +1,12 @@
+div(class='full-article')
+	div(class='sidebar')
+		img(class='c-picture' ng-src='images/{{review.img}}.png' alt='{{review.fullName}}') 
+		div(class='c-author') by <b>{{review.fullName}}</b>
+		div(class='c-location') in <b>{{review.location}}</b>
+		img(class='c-rating' ng-src='images/{{review.starRating}}-star-260x48.png' alt='Star Rating {{review.starRating}}')
+		div(class='sidebar-nav')
+			a(class='previous' ng-href='#/app/{{review.id}}/review' ng-click='prevPage()') &#8592; Previuos
+			a(class='next' ng-href='#/app/{{review.id}}/review' ng-click='nextPage()') Next &#8594;
+	div(class='content')
+		h1 {{review.reviewTitle}}
+		div(class='c-body') {{review.reviewBody}}
