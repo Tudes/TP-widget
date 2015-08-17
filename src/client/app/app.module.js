@@ -1,15 +1,15 @@
 (function() {
 	'use strict';
-	
 	var app = angular
 				.module('app', [
 					'ui.router',
 					'ngAnimate',
 					'app.core',
 					'app.reviews'
-				])
+				]);
 
-	app.config(['$urlRouterProvider', '$stateProvider', '$locationProvider', function($urlRouterProvider, $stateProvider, $locationProvider) {
+	app.config(['$urlRouterProvider', '$stateProvider', '$locationProvider',
+				function($urlRouterProvider, $stateProvider, $locationProvider) {
 
 		$urlRouterProvider.otherwise('/app/reviews');
 
@@ -34,11 +34,6 @@
 				url: '/:id/review',
 				templateUrl: ('app/reviews/review-detail.tpls.html'),
 				controller: 'CoreCtrl'
-			})
-			// state('one', {
-			// 	url: '/one',
-			// 	templateUrl: ('app/reviews/review-detail.tpls.html')
-			// })
-	}])
-
+			});
+	}]);
 })();

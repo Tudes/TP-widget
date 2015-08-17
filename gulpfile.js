@@ -83,10 +83,28 @@ gulp.task('css', ['clean-css'], function() {
 		.pipe(gulp.dest(config.tmp))
 });
 
+// gulp.task('clean-js', function(cb) {
+// 	log('Cleaning old AngularJS files');
+
+// 	del(config.module_js, cb);
+// })
+
 gulp.task('clean-js', function(cb) {
-	log('Cleaning old AngularJS files');
+	log('Cleaning AngularJS old files');
 
 	del(config.module_js, cb);
+});
+
+gulp.task('lint', function() {
+	log('JSHINT and JSCS runnning')
+
+	return gulp
+		.src(config.js)
+		// .pipe(plugins.if(args.verbose, $.print()))
+		.pipe(plugins.jscs())
+		.pipe(plugins.jshint())
+		.pipe(plugins.jshint.reporter('jshint-stylish', {verbose: true}))
+		.pipe(plugins.jshint.reporter('fail'));
 })
 
 /**
