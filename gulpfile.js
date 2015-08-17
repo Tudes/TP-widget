@@ -1,22 +1,21 @@
 'use strict';
 
 //TODO: Add Gulp-load-plugins
-//TODO: Create a config file to store paths
 //TODO: Add BrowserSync
 //
 //TODO: Features Animate CSS Level 3
+//TODO: Plugins to be added - htmlmin, cssmin, 
 
 var gulp = require('gulp'),
 	args = require('yargs').argv,
 	del = require('del'),
 	$ = require('gulp-util'),
-	todo = require('gulp-todo'),
-	jade = require('gulp-jade'),
-	imagemin = require('gulp-imagemin'),
-	autoprefixer = require('gulp-autoprefixer'),
 	uglify = require('gulp-uglify'),
 	concat = require('gulp-concat'),
-	sass = require('gulp-ruby-sass');
+	sass = require('gulp-ruby-sass'),
+
+	plugins = require('gulp-load-plugins')({lazy: true}),
+	config = require('./config')();
 
 /**
 *
@@ -27,27 +26,27 @@ var gulp = require('gulp'),
 gulp.task('clean-jade', function(cb) {
 	log('Clening old HTML files');
 
-	del('./.tmp/**/*.html', cb);
+	del(config.html, cb);
 });
 
 gulp.task('jade', ['clean-jade'], function() {
 	log('Compiling Jade templates');
 
 	return gulp
-		.src('./src/client/**/*.jade')
-		.pipe(jade({
+		.src(config.jade)
+		.pipe(plugins.jade({
 			pretty: true
 		}))
-		.pipe(gulp.dest('./.tmp'))
+		.pipe(gulp.dest(config.tmp))
 });
 
 gulp.task('uglify', function() {
 	log('Uglifying vendor libraries');
 
 	return gulp
-		.src('./.tmp/vendor/*.js')
+		.src(config.js)
 		.pipe(uglify())
-		.pipe(gulp.dest('./.tmp/minify'));
+		.pipe(gulp.dest('./.tmp/**/*.js'));
 });
 
 gulp.task('concat', function() {
@@ -68,20 +67,27 @@ gulp.task('concat', function() {
 gulp.task('clean-css', function(cb) {
 	log('Cleaning old CSS files');
 
-	del('./.tmp/**/*.css', cb);
+	del(config.css, cb);
 });
 
 // Using autoprefixer since it is up to date with all the specs on Can I Use
 
+// It looks like the Gulp-ruby-sass plugin is more active in terms of commits
 
 gulp.task('css', ['clean-css'], function() {
 	log('Compiling SCSS files');
 
-	return sass('./src/client/styles/')
+	return sass(config.sass)
 		.on('error', errorLog)
-		.pipe(autoprefixer({browsers: ['last 2 version', '> 5%']}))
-		.pipe(gulp.dest('./.tmp'))
+		.pipe(plugins.autoprefixer({browsers: ['last 2 version', '> 5%']}))
+		.pipe(gulp.dest(config.tmp))
 });
+
+gulp.task('clean-js', function(cb) {
+	log('Cleaning old AngularJS files');
+
+	del(config.module_js, cb);
+})
 
 /**
 *
@@ -92,39 +98,37 @@ gulp.task('css', ['clean-css'], function() {
 gulp.task('clean-imagemin', function(cb) {
 	log('Cleaning images folder');
 
-	del('./.tmp/images/**/*.*', cb);
+	del(config.images_tmp, cb);
 });
 
 gulp.task('imagemin', ['clean-imagemin'], function() {
 	log('Copying and optimizing images to the distribution folder');
 
 	return gulp
-		.src('./src/client/images/**/*.*')
-		.pipe(imagemin({
+		.src(config.images)
+		.pipe(plugins.imagemin({
 			optimizationLevel: 5
 		}))
 		.pipe(gulp.dest('./.tmp/images'))
 });
-
-// gulp.task('default', function() {
-// 	log('Default task ran');
-// });
 
 gulp.task('todo', function() {
 	log('Generating a to do list');
 
 	return gulp
 		.src(['./gulpfile.js'])
-		.pipe(todo())
-		.pipe(gulp.dest('./'))
+		.pipe(plugins.todo())
+		.pipe(gulp.dest(config.root))
 });
 
 gulp.task('watch', function() {
-	gulp.watch('./src/client/**/*.jade', ['jade']);
-	gulp.watch('./src/client/styles/**/*.scss', ['css']);
+	gulp.watch(config.jade, ['jade']);
+	gulp.watch(config.sass + '**/*.scss', ['css']);
 });
 
-gulp.task('default', ['watch', 'jade', 'css']);
+gulp.task('default', ['watch', 'jade', 'css', 'todo']);
+
+gulp.task('build', []);
 
 /*==========  helperFunctions  ==========*/
 
@@ -134,15 +138,6 @@ gulp.task('default', ['watch', 'jade', 'css']);
 // 	}
 
 // 	log('Starting browser-sync on port ' + port);
-
-// 	gulp.watch(['src/client/styles/style.scss'], ['css'])
-// 		.on('change', function(event) {
-// 			changeEvent(event); 
-// 		});
-// 	gulp.watch(['src/client/**/*.jade'], ['jade'])
-// 		.on('change', function(event) {
-// 			changeEvent(event); 
-// 		});
 
 // 	var options = {
 // 		proxy: 'localhost:' + port,
