@@ -1,0 +1,8 @@
+
+<div class="grid">
+  <div ng-repeat="review in reviews" class="grid-box"><a ng-href="#/app/{{review.id}}/review" class="grid-item">
+      <h2 class="title">{{review.reviewTitle}}</h2>
+      <div class="description">{{review.reviewBody | limitTo: 15}}...</div><img ng-src="images/{{review.img}}.png" alt="{{review.fullName}}" class="picture"/>
+      <div class="location"> <img src="images/marker.png" alt="Marker" class="i-marker"/>{{review.location}}</div>
+      <div class="user"><img src="images/user.png" alt="User" class="i-user"/>{{review.fullName}}</div></a></div>
+</div>

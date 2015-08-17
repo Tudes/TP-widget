@@ -1,0 +1,12 @@
+
+<div class="full-article">
+  <div class="sidebar"><img ng-src="images/{{review.img}}.png" alt="{{review.fullName}}" class="c-picture"/>
+    <div class="c-author">by <b>{{review.fullName}}</b></div>
+    <div class="c-location">in <b>{{review.location}}</b></div><img ng-src="images/{{review.starRating}}-star-260x48.png" alt="Star Rating {{review.starRating}}" class="c-rating"/>
+    <div class="sidebar-nav"><a ng-href="#/app/{{review.id}}/review" ng-click="prevPage()" class="previous">&#8592; Previuos</a><a ng-href="#/app/{{review.id}}/review" ng-click="nextPage()" class="next">Next &#8594;</a></div>
+  </div>
+  <div class="content">
+    <h1>{{review.reviewTitle}}</h1>
+    <div class="c-body">{{review.reviewBody}}</div>
+  </div>
+</div>

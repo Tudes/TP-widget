@@ -53,7 +53,7 @@ gulp.task('concat', function() {
 	log('Concatinating vendor libraries');
 
 	return gulp
-		.src('./.tmp/minify/*.js')
+		.src('./.tmp/vendor/*.js')
 		.pipe(concat('all.js'))
 		.pipe(gulp.dest('./.tmp/concat'));
 });
@@ -128,6 +128,14 @@ gulp.task('imagemin', ['clean-imagemin'], function() {
 			optimizationLevel: 5
 		}))
 		.pipe(gulp.dest('./.tmp/images'))
+});
+
+gulp.task('copy', function() {
+	log('Copying files to distribution');
+
+	return gulp
+		.src('./.tmp/**/*')
+		.pipe(gulp.dest('./dist/'))
 });
 
 gulp.task('todo', function() {
