@@ -71,7 +71,6 @@ gulp.task('clean-css', function(cb) {
 });
 
 // Using autoprefixer since it is up to date with all the specs on Can I Use
-
 // It looks like the Gulp-ruby-sass plugin is more active in terms of commits
 
 gulp.task('css', ['clean-css'], function() {
@@ -82,12 +81,6 @@ gulp.task('css', ['clean-css'], function() {
 		.pipe(plugins.autoprefixer({browsers: ['last 2 version', '> 5%']}))
 		.pipe(gulp.dest(config.tmp))
 });
-
-// gulp.task('clean-js', function(cb) {
-// 	log('Cleaning old AngularJS files');
-
-// 	del(config.module_js, cb);
-// })
 
 gulp.task('clean-js', function(cb) {
 	log('Cleaning AngularJS old files');
